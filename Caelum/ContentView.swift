@@ -9,59 +9,22 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State private var inputText: String = ""
-    @State private var city: String = ""
+    @State var city: String = ""
     var body: some View {
         VStack{
-            VStack{
-                //Title
+            //Title
+            if city.isEmpty {
                 Text("Caelum")
                     .font(.largeTitle)
                     .foregroundStyle(Color.white)
-                
-                //Data
-                Text(city)
-                    .foregroundStyle(Color.white)
-            }
-            
-            if !city.isEmpty{
+            } else {
+                WeatherView(city: $city)
+                    .padding(75)
                 Spacer()
             }
-            
-            //Bottom Toolbar
-            VStack{
-                HStack {
-                    //Search Bar
-                    HStack{
-                        //Search Field
-                        TextField(
-                            "Search for a city",
-                            text: $inputText
-                        )
-                            .onSubmit {
-                                city = inputText
-                            }
-                        
-                        //Magnifying Glass
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                    }
-                    .padding(15)
-                    .glassEffect()
-                    
-                    
-                    
-                    //Camera
-                    HStack{
-                        Image(systemName: "camera")
-                            .foregroundColor(.gray)
-                    }
-                    .padding(15)
-                    .glassEffect()
-                }
-                .padding(.horizontal, 10)
-            }
+            ToolbarView(city: $city)
         }
+        .padding(15)
         .caelumBackgroundModifier()
     }
 }
