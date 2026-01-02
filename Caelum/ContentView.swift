@@ -4,7 +4,7 @@
 //
 
 import SwiftUI
-
+import FoundationModels
 
 struct ContentView: View {
     @State var location = LocationGeocoded(name: "", lat: 0.0, lon: 0.0, state: "", country: "")
@@ -22,25 +22,18 @@ struct ContentView: View {
             )
         ]
     )
+    @State private var path = NavigationPath()
     var body: some View {
-        VStack{
-            //Title
-            if location.name.isEmpty {
-                Text("Caelum")
-                    .font(.largeTitle)
-                    .foregroundStyle(Color.white)
-            } else {
-                WeatherView(location: $location, data: $data)
-                    .padding(75)
-                Spacer()
-            }
-            ToolbarView(location: $location, data: $data)
+        NavigationStack(path: $path){
+            HomeView(location: $location, data: $data, path: $path)
+                .navigationDestination(for: String.self) { destination in
+                        WeatherView(location: $location, data: $data)
+                }
         }
-        .padding(15)
-        .caelumBackgroundModifier()
     }
 }
 
 #Preview {
     ContentView()
 }
+

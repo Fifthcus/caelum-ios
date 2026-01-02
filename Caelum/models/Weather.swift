@@ -4,7 +4,7 @@
 //
 
 
-struct Weather: Codable {
+struct Weather: Codable, Equatable {
     var description: String
     
     init(description: String) {
@@ -12,7 +12,7 @@ struct Weather: Codable {
     }
 }
 
-struct Current: Codable {
+struct Current: Codable, Equatable {
     var temp: Double
     var weather: [Weather]
     
@@ -24,16 +24,16 @@ struct Current: Codable {
 
 //
 
-struct TempRange: Codable {
+struct TempRange: Codable, Equatable {
     var min: Double
     var max: Double
 }
-struct Daily: Codable {
+struct Daily: Codable, Equatable {
     var temp: TempRange
 }
 
 nonisolated
-struct WeatherData: Codable {
+struct WeatherData: Codable, Equatable {
     var current: Current
     var daily: [Daily]
     
