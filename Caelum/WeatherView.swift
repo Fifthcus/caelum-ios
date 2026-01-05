@@ -9,13 +9,13 @@ struct WeatherView: View {
     @Binding var location: LocationGeocoded
     @Binding var data: WeatherData
     var degree_symbol: Bool = true
+    let key = Secrets.apiKey
     
     func fetchWeather() async {
         do{
-            let environemnt = ProcessInfo.processInfo.environment
-            if environemnt["API_KEY"] != nil {
+            if key != "" {
                 //geocode url
-                let url_to_geocode_city: URL = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(location.name)&limit=1&appid=\(environemnt["API_KEY"])")!
+                let url_to_geocode_city: URL = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(location.name)&limit=1&appid=\(key)")!
                 //geocode api call
                 let (geocoded_location, _) = try await URLSession.shared.data(from: url_to_geocode_city)
                 let location_decoded = try JSONDecoder().decode([LocationGeocoded].self, from: geocoded_location)
@@ -24,19 +24,18 @@ struct WeatherView: View {
                 location = location_decoded.first!
                 
                 //weather api url
-                let url_to_fetch_weather: URL = URL(string: "https://api.openweathermap.org/data/3.0/onecall?lat=\(location.lat)&lon=\(location.lon)&appid=249850dec3739444cddb23b0dafe8ca0&units=imperial")!
+                let url_to_fetch_weather: URL = URL(string: "https://api.openweathermap.org/data/3.0/onecall?lat=\(location.lat)&lon=\(location.lon)&appid=\(key)&units=imperial")!
                 //weather api call
                 let (weather_data, _) = try await URLSession.shared.data(from: url_to_fetch_weather)
                 let weather_data_decoded = try JSONDecoder().decode(WeatherData.self, from: weather_data)
                 
                 data = weather_data_decoded
-            } else {
-                
+                print(location)
+                print(data)
             }
         } catch {
-            print("-+X+-")
             print(error)
-            print("-+X+-")
+            print(error)
         }
     }
     var body: some View {
@@ -85,36 +84,3 @@ struct WeatherView: View {
         }
     }
 }
-/*
-#Preview {
-    WeatherView(
-        location: .constant(
-            LocationGeocoded(
-                name: "Seattle",
-                lat: 0.0,
-                lon: 0.0,
-                state: "Washington",
-                country: "USA"
-            )
-        ),
-        data: .constant(
-            WeatherData(
-                current: Current(
-                    temp: 50.0,
-                    weather: [
-                        Weather(description: "Rain")
-                    ]
-                ),
-                daily: [
-                    Daily(
-                        temp: TempRange(
-                            min: 45.0,
-                            max: 55.0
-                        )
-                    )
-                ]
-            )
-        )
-    )
-}
-*/
