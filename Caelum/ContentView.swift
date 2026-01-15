@@ -7,27 +7,37 @@ import SwiftUI
 import FoundationModels
 
 struct ContentView: View {
-    @State var location = LocationGeocoded(name: "", lat: 0.0, lon: 0.0, state: "", country: "")
-    @State var data = WeatherData(
+    @State var userInput: String = ""
+    @State var weatherData: Weather = Weather(
+        location: Location(name: "", region: "", country: ""),
         current: Current(
-            temp: 0.0,
-            weather: [Weather(description: "")]
+            temp_f: 0.0,
+            condition: Condition(text: "")
         ),
-        daily: [
-            Daily(
-                temp: TempRange(
-                    min: 0.0,
-                    max: 0.0
+        forecast: Forecast(
+            forecastday: [
+                Forecastday(
+                    day: Day(
+                        mintemp_f: 0.0,
+                        maxtemp_f: 0.0
+                    ),
+                    hour: [
+                        Hour(
+                            time: "00:00",
+                            temp_f: 0.0,
+                            condition: Condition(text: "")
+                        )
+                    ]
                 )
-            )
-        ]
+            ]
+        )
     )
     @State private var path = NavigationPath()
     var body: some View {
         NavigationStack(path: $path){
-            HomeView(location: $location, data: $data, path: $path)
+            HomeView(userInput: $userInput, weatherData: $weatherData, path: $path)
                 .navigationDestination(for: String.self) { destination in
-                        WeatherView(location: $location, data: $data)
+                    WeatherView(userInput: $userInput, weatherData: $weatherData)
                 }
         }
     }
@@ -36,4 +46,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-

@@ -2,14 +2,12 @@
 //  HomeView.swift
 //  Caelum
 //
-//  Created by Michael Stetter on 12/26/25.
-//
 
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var location: LocationGeocoded
-    @Binding var data: WeatherData
+    @Binding var userInput: String
+    @Binding var weatherData: Weather
     @Binding var path: NavigationPath
 
     var body: some View {
@@ -18,7 +16,7 @@ struct HomeView: View {
                 .font(.largeTitle)
                 .foregroundStyle(Color.white)
 
-            ToolbarView(location: $location, data: $data, path: $path)
+            ToolbarView(userInput: $userInput, weatherData: $weatherData, path: $path)
         }
         .padding(15)
         .caelumBackgroundModifier()

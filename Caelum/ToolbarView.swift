@@ -7,12 +7,12 @@ import SwiftUI
 
 struct ToolbarView: View {
     @State var inputText: String = ""
-    @Binding var location: LocationGeocoded
-    @Binding var data: WeatherData
+    @Binding var userInput: String
+    @Binding var weatherData: Weather
     @Binding var path: NavigationPath
     
     func navigateToNewView(){
-        location.name = inputText
+        userInput = inputText
         path.append("weather")
         inputText = ""
     }
@@ -23,23 +23,29 @@ struct ToolbarView: View {
             HStack{
                 //Search Field
                 TextField(
-                    "Search for a city",
-                    text: $inputText
+                    "",
+                    text: $inputText,
+                    prompt: Text("Enter a city")
+                        .foregroundStyle(Color(#colorLiteral(red: 0.8734392524, green: 0.912833333, blue: 0.9223466516, alpha: 1)))
                 )
+                .foregroundStyle(Color.white)
                 .onSubmit {
                     navigateToNewView()
                 }
             }
+            .foregroundStyle(Color.white)
             .padding(20)
-            .glassEffect()
+            .glassEffect(.clear)
+            
             //Magnifying Glass
             HStack{
                 Button(action: navigateToNewView){
                     Image(systemName: "magnifyingglass")
                 }
             }
+            .foregroundStyle(Color.white)
             .padding(20)
-            .glassEffect()
+            .glassEffect(.clear)
              
         }
         Button("Get my location"){

@@ -9,15 +9,15 @@ import Playgrounds
 import SwiftUI
 
 struct GenerateRecommendation: View {
-    @Binding var data: WeatherData
+    @Binding var weatherData: Weather
     var session = LanguageModelSession(instructions: "In two very short sentences, suggest how to be best prepared given the provided weather data. Do not create lists.")
     @State var recommendation: String = ""
     
     func generateRecommendation() async {
-        let description = data.current.weather.first?.description.capitalized ?? "Clear"
-        let currentTemp = Int(round(data.current.temp))
-        let lowTemp = Int(round(data.daily.first?.temp.min ?? 0))
-        let highTemp = Int(round(data.daily.first?.temp.max ?? 0))
+        let description = weatherData.current.condition.text
+        let currentTemp = weatherData.current.temp_f
+        let lowTemp = weatherData.forecast.forecastday[0].day.mintemp_f
+        let highTemp = weatherData.forecast.forecastday[0].day.maxtemp_f
 
         let prompt = """
         The weather is \(description).
@@ -41,11 +41,10 @@ struct GenerateRecommendation: View {
         }
         .foregroundStyle(Color.white)
         .caelumContainerModifier()
-        .onChange(of: data) { oldValue, newValue in
+        .onChange(of: weatherData) { oldValue, newValue in
             Task {
                 await generateRecommendation()
             }
         }
     }
 }
-
