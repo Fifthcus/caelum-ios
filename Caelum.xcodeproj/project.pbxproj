@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8540B3E2F190271004C2993 /* ContainerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8540B3D2F190271004C2993 /* ContainerHeader.swift */; };
 		E86AE48B2F07C7A60092644E /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E86AE48A2F07C7A60092644E /* Secrets.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E8540B3D2F190271004C2993 /* ContainerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerHeader.swift; sourceTree = "<group>"; };
 		E86AE48A2F07C7A60092644E /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		E881656C2ED7F58900A396F5 /* Caelum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Caelum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -50,6 +52,7 @@
 		E88165632ED7F58900A396F5 = {
 			isa = PBXGroup;
 			children = (
+				E8540B3D2F190271004C2993 /* ContainerHeader.swift */,
 				E86AE48A2F07C7A60092644E /* Secrets.xcconfig */,
 				E881656E2ED7F58900A396F5 /* Caelum */,
 				E881656D2ED7F58900A396F5 /* Products */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8540B3E2F190271004C2993 /* ContainerHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

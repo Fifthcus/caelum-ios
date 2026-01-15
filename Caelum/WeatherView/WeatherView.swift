@@ -17,32 +17,12 @@ struct WeatherView: View {
                 let url: URL = URL(string:"https://api.weatherapi.com/v1/forecast.json?key=\(key)&q=\(userInput)&days=1&aqi=no&alerts=yes")!
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let decoded = try JSONDecoder().decode(Weather.self, from: data)
-                print(data)
-                print(decoded)
                 
                 weatherData = decoded
             }
         } catch {
             print(error)
         }
-    }
-    private var locationName: String {
-        weatherData.location.name
-    }
-    private var locationRegion: String {
-        weatherData.location.region
-    }
-    private var currentTemperature: Double {
-        weatherData.current.temp_f
-    }
-    private var condition: String {
-        weatherData.current.condition.text
-    }
-    private var minTemp: Double {
-        weatherData.forecast.forecastday.first!.day.mintemp_f
-    }
-    private var maxTemp: Double {
-        weatherData.forecast.forecastday.first!.day.maxtemp_f
     }
     var body: some View {
         ScrollView(.vertical){

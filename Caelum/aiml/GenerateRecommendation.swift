@@ -40,6 +40,7 @@ struct GenerateRecommendation: View {
                 .font(.footnote)
         }
         .foregroundStyle(Color.white)
+        .frame(width: .infinity)
         .caelumContainerModifier()
         .onChange(of: weatherData) { oldValue, newValue in
             Task {
