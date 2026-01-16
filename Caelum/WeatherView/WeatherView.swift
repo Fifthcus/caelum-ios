@@ -36,8 +36,9 @@ struct WeatherView: View {
                     .padding(.vertical)
 
                 //Hourly Forecst
-                HourlyForecastView(weatherData: $weatherData)
-                    .padding(.vertical)
+                CaelumSection(headerText: "Hourly Forecast"){
+                    HourlyForecastView(weatherData: $weatherData)
+                }
             }
             .padding()
         }

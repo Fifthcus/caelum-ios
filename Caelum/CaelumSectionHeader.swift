@@ -5,16 +5,11 @@
 
 import SwiftUI
 
-struct ContainerHeader: View {
-    @Binding var header: String
+struct CaelumSectionHeader: View {
+    @Binding var headerText: String
     var body: some View {
-        Text(header)
+        Text(headerText)
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity, alignment: .topLeading)
     }
-}
-
-#Preview {
-    @Previewable @State var header: String = "Test"
-    ContainerHeader(header: $header)
 }
