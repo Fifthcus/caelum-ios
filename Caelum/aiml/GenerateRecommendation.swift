@@ -8,39 +8,36 @@ import FoundationModels
 import Playgrounds
 import SwiftUI
 
+@Generable
+struct Recommendation {
+    let text: String
+}
+
 struct GenerateRecommendation: View {
     @Binding var weatherData: Weather
-    var session = LanguageModelSession(instructions: "In two very short sentences, suggest how to be best prepared given the provided weather data. Do not create lists.")
-    @State var recommendation: String = ""
+    static let instructions: String = "In two short sentences, suggest how to safely prepare for the weather based on the provided data. Ensure your responses are one sentence after another, no lists, and do not format your response where the second sentence appears on a new line."
+    var session = LanguageModelSession(instructions: instructions)
+    @State var recommendation: Recommendation.PartiallyGenerated?
     
     func generateRecommendation() async {
-        let description = weatherData.current.condition.text
-        let currentTemp = weatherData.current.temp_f
-        let lowTemp = weatherData.forecast.forecastday[0].day.mintemp_f
-        let highTemp = weatherData.forecast.forecastday[0].day.maxtemp_f
-
-        let prompt = """
-        The weather is \(description).
-        The current temperature is \(currentTemp) degrees Fahrenheit.
-        The day's low will be \(lowTemp) degrees Fahrenheit.
-        The day's high will be \(highTemp) degrees Fahrenheit.
-        In two very short sentences, suggest how the user may best prepare themselves given this weather.
-        """
+        let prompt = "\(weatherData)"
+        let responseToStreamToUI = session.streamResponse(to: prompt, generating: Recommendation.self)
         
         do {
-            let response = try await session.respond(to: prompt)
-            recommendation = response.content
+            for try await partial in responseToStreamToUI {
+                recommendation = partial.content
+            }
         } catch {
-            recommendation = ""
+            print(error)
         }
     }
     var body: some View {
-        Group {
-            Text(recommendation)
+        VStack{
+            Text(recommendation?.text ?? "Loading...")
                 .font(.footnote)
         }
         .foregroundStyle(Color.white)
-        .frame(width: .infinity)
+        .frame(maxWidth: .infinity)
         .caelumContainerModifier()
         .onChange(of: weatherData) { oldValue, newValue in
             Task {
@@ -49,3 +46,4 @@ struct GenerateRecommendation: View {
         }
     }
 }
+
