@@ -7,6 +7,7 @@ import SwiftUI
 import FoundationModels
 
 struct ContentView: View {
+    @Environment(\.dismiss) private var dismiss
     @State var userInput: String = ""
     @State var weatherData: Weather = Weather(
         location: Location(name: "", region: "", country: ""),
@@ -38,6 +39,17 @@ struct ContentView: View {
             HomeView(userInput: $userInput, weatherData: $weatherData, path: $path)
                 .navigationDestination(for: String.self) { destination in
                     WeatherView(userInput: $userInput, weatherData: $weatherData)
+                        .navigationBarBackButtonHidden(true)
+                        .toolbar{
+                            ToolbarItem(placement: .topBarLeading) {
+                                Button {
+                                    $path.wrappedValue.removeLast()
+                                } label: {
+                                    Image(systemName: "chevron.backward")
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                        }
                 }
         }
     }

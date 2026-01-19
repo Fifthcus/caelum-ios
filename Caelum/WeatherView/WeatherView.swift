@@ -31,12 +31,12 @@ struct WeatherView: View {
                 TemperatureView(weatherData: $weatherData)
                 
                 //FoundationModels Recommender
-                GenerateRecommendation(weatherData: $weatherData)
-                    .frame(width: .infinity)
-                    .padding(.vertical)
+                CaelumSection(icon: "sparkles.2", headerText: "AI Recommendation"){
+                    GenerateRecommendation(weatherData: $weatherData)
+                }
 
                 //Hourly Forecst
-                CaelumSection(headerText: "Hourly Forecast"){
+                CaelumSection(icon: "clock", headerText: "Hourly Forecast"){
                     HourlyForecastView(weatherData: $weatherData)
                 }
             }

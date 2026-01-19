@@ -6,10 +6,15 @@
 import SwiftUI
 
 struct CaelumSectionHeader: View {
+    @Binding var icon: String
     @Binding var headerText: String
     var body: some View {
-        Text(headerText)
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+        HStack {
+            Image(systemName: icon)
+                .foregroundStyle(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+            Text(headerText)
+                .foregroundStyle(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+        }
     }
 }

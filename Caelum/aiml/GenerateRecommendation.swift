@@ -2,7 +2,6 @@
 //  GenerateRecommendation.swift
 //  Caelum
 //
-//
 
 import FoundationModels
 import Playgrounds
@@ -34,11 +33,9 @@ struct GenerateRecommendation: View {
     var body: some View {
         VStack{
             Text(recommendation?.text ?? "Loading...")
-                .font(.footnote)
+                .font(.default)
         }
         .foregroundStyle(Color.white)
-        .frame(maxWidth: .infinity)
-        .caelumContainerModifier()
         .onChange(of: weatherData) { oldValue, newValue in
             Task {
                 await generateRecommendation()
@@ -46,4 +43,3 @@ struct GenerateRecommendation: View {
         }
     }
 }
-
