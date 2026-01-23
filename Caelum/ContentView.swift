@@ -31,7 +31,8 @@ struct ContentView: View {
                     ]
                 )
             ]
-        )
+        ),
+        alerts: Alerts(alert: [])
     )
     @State private var path = NavigationPath()
     var body: some View {

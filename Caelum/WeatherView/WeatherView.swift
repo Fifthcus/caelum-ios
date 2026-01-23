@@ -30,6 +30,15 @@ struct WeatherView: View {
                 //Temperature View
                 TemperatureView(weatherData: $weatherData)
                 
+                //Alerts view
+                if weatherData.alerts.alert.isEmpty {
+                    
+                } else {
+                    CaelumSection(icon: "exclamationmark.circle", headerText: "Advisory"){
+                        AlertsView(alerts: $weatherData.alerts)
+                    }
+                }
+                
                 //FoundationModels Recommender
                 CaelumSection(icon: "sparkles.2", headerText: "AI Recommendation"){
                     GenerateRecommendation(weatherData: $weatherData)

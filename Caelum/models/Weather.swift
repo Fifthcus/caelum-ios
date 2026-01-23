@@ -48,6 +48,23 @@ struct Forecastday: Decodable, Equatable {
     }
 }
 
+struct Alert: Decodable, Equatable {
+    var severity: String
+    var event: String
+    var headline: String
+    init(severity: String, event: String, headline: String){
+        self.severity = severity
+        self.event = event
+        self.headline = headline
+    }
+}
+
+struct Alerts: Decodable, Equatable{
+    var alert: [Alert]
+    init(alert: [Alert]){
+        self.alert = alert
+    }
+}
 
 struct Location: Decodable, Equatable {
     var name: String
@@ -78,9 +95,11 @@ struct Weather: Decodable, Equatable {
     var location: Location
     var current: Current
     var forecast: Forecast
-    init(location: Location, current: Current, forecast: Forecast){
+    var alerts: Alerts
+    init(location: Location, current: Current, forecast: Forecast, alerts: Alerts){
         self.location = location
         self.current = current
         self.forecast = forecast
+        self.alerts = alerts
     }
 }
