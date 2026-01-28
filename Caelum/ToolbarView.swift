@@ -48,10 +48,6 @@ struct ToolbarView: View {
             .glassEffect(.clear)
              
         }
-        Button("Get my location"){
-            print("testing")
-        }
-            .foregroundStyle(Color.white)
-            .padding()
+        CurrentLocation(weatherData: $weatherData, userInput: $userInput, path: $path)
     }
 }
