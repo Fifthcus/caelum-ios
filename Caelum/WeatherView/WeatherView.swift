@@ -4,10 +4,12 @@
 //
 
 import SwiftUI
+import FoundationModels
 
 struct WeatherView: View {
     @Binding var userInput: String
     @Binding var weatherData: Weather
+    @Binding var onDeviceLLMModel: SystemLanguageModel
     var degree_symbol: Bool = true
     let key = Secrets.apiKey
     
@@ -31,17 +33,17 @@ struct WeatherView: View {
                 TemperatureView(weatherData: $weatherData)
                 
                 //Alerts view
-                if weatherData.alerts.alert.isEmpty {
-                    
-                } else {
+                if !weatherData.alerts.alert.isEmpty {
                     CaelumSection(icon: "exclamationmark.circle", headerText: "Advisory"){
                         AlertsView(alerts: $weatherData.alerts)
                     }
                 }
                 
                 //FoundationModels Recommender
-                CaelumSection(icon: "sparkles.2", headerText: "AI Recommendation"){
-                    GenerateRecommendation(weatherData: $weatherData)
+                if case .available = onDeviceLLMModel.availability {
+                    CaelumSection(icon: "sparkles.2", headerText: "AI Recommendation"){
+                        GenerateRecommendation(weatherData: $weatherData)
+                    }
                 }
 
                 //Hourly Forecst

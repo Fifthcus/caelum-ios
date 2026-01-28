@@ -35,11 +35,12 @@ struct ContentView: View {
         alerts: Alerts(alert: [])
     )
     @State private var path = NavigationPath()
+    @State private var onDeviceLLMModel = SystemLanguageModel.default
     var body: some View {
         NavigationStack(path: $path){
-            HomeView(userInput: $userInput, weatherData: $weatherData, path: $path)
+            HomeView(userInput: $userInput, weatherData: $weatherData, path: $path, onDeviceLLMModel: $onDeviceLLMModel)
                 .navigationDestination(for: String.self) { destination in
-                    WeatherView(userInput: $userInput, weatherData: $weatherData)
+                    WeatherView(userInput: $userInput, weatherData: $weatherData, onDeviceLLMModel: $onDeviceLLMModel)
                         .navigationBarBackButtonHidden(true)
                         .toolbar{
                             ToolbarItem(placement: .topBarLeading) {
