@@ -24,17 +24,17 @@ struct TemperatureView: View {
                 .foregroundStyle(Color.white)
             
             HStack {
-                
                 //Low
-                Text("L: \(Int(weatherData.forecast.forecastday.first!.day.mintemp_f))°")
-                    .font(.title2)
-                    .foregroundStyle(Color.white)
+                if let minTemp = weatherData.forecast.forecastday.first?.day.mintemp_f {
+                    Text("L: \(Int(minTemp))°")
+                }
                 //High
-                Text("H: \(Int(weatherData.forecast.forecastday.first!.day.maxtemp_f))°")
-                    .font(.title2)
-                    .foregroundStyle(Color.white)
-                
+                if let maxTemp = weatherData.forecast.forecastday.first?.day.maxtemp_f {
+                    Text("L: \(Int(maxTemp))°")
+                }
             }
+            .foregroundStyle(Color.white)
+            .font(.title2)
             .padding(.top, 15)
         }
     }

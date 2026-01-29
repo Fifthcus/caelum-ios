@@ -9,31 +9,7 @@ import FoundationModels
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
     @State var userInput: String = ""
-    @State var weatherData: Weather = Weather(
-        location: Location(name: "", region: "", country: ""),
-        current: Current(
-            temp_f: 0.0,
-            condition: Condition(text: "")
-        ),
-        forecast: Forecast(
-            forecastday: [
-                Forecastday(
-                    day: Day(
-                        mintemp_f: 0.0,
-                        maxtemp_f: 0.0
-                    ),
-                    hour: [
-                        Hour(
-                            time: "00:00",
-                            temp_f: 0.0,
-                            condition: Condition(text: "")
-                        )
-                    ]
-                )
-            ]
-        ),
-        alerts: Alerts(alert: [])
-    )
+    @State var weatherData: Weather = Weather()
     @State private var path = NavigationPath()
     @State private var onDeviceLLMModel = SystemLanguageModel.default
     var body: some View {
@@ -45,6 +21,7 @@ struct ContentView: View {
                         .toolbar{
                             ToolbarItem(placement: .topBarLeading) {
                                 Button {
+                                    weatherData = Weather()
                                     $path.wrappedValue.removeLast()
                                 } label: {
                                     Image(systemName: "chevron.backward")
