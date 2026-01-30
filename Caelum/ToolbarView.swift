@@ -15,8 +15,10 @@ struct ToolbarView: View {
     func navigateToNewView(){
         isTextFieldFocused = false
         userInput = inputText
-        path.append("weather")
-        inputText = ""
+        if !userInput.isEmpty{
+            path.append("weather")
+            inputText = ""
+        }
     }
     
     var body: some View {

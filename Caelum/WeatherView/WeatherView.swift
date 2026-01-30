@@ -10,7 +10,6 @@ struct WeatherView: View {
     @Binding var userInput: String
     @Binding var weatherData: Weather
     @Binding var onDeviceLLMModel: SystemLanguageModel
-    var degree_symbol: Bool = true
     let key = Secrets.apiKey
     
     func fetchWeather() async {

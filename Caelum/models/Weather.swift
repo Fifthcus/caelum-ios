@@ -65,4 +65,12 @@ struct Weather: Decodable, Equatable {
     var current: Current = Current(temp_f: 0.0, condition: Condition(text: ""))
     var forecast: Forecast = Forecast(forecastday: [])
     var alerts: Alerts = Alerts(alert: [])
+    
+    var isEmpty: Bool {
+        if location.name.isEmpty && forecast.forecastday.isEmpty {
+            return true
+        } else {
+            return false
+        }
+    }
 }
