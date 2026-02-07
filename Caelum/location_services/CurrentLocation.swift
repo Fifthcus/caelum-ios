@@ -25,15 +25,11 @@ struct CurrentLocation: View {
             }
             .foregroundStyle(Color.white)
         }
-        .onChange(of: manager.coordinates.map { coords in
-            Coords(latitude: coords.latitude, longitude: coords.longitude)
-        }) { oldValue, newValue in
-            if let coords = newValue {
-                userInput = "\(coords.latitude), \(coords.longitude)"
-                path.append("weather")
-            } else {
-                userInput = ""
-            }
+        .onReceive(manager.$coordinates){ coordinates in
+            guard let coordinates else { return }
+            userInput = "\(coordinates.latitude), \(coordinates.longitude)"
+            path.append("weather")
+            
         }
     }
 }
