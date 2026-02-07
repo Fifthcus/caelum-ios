@@ -5,10 +5,12 @@
 
 import SwiftUI
 
+/// A SwiftUI view which displays the fetched current weather data. The data is derived from a api fetch request from www.weatherapi.com.
 struct TemperatureView: View {
-    @Binding var weatherData: Weather
+    var weatherData: Weather
     var body: some View {
         VStack{
+            //Locale and Region / City and State
             Text("\(weatherData.location.name), \(weatherData.location.region)")
                 .font(.title)
                 .foregroundStyle(Color.white)
@@ -19,10 +21,12 @@ struct TemperatureView: View {
                 .padding(15)
                 .foregroundStyle(Color.white)
             
+            //Conidition i.e, rainy, snowy, etc
             Text("\(weatherData.current.condition.text)")
                 .font(.title2)
                 .foregroundStyle(Color.white)
             
+            //High and Low Temp
             HStack {
                 //Low
                 if let minTemp = weatherData.forecast.forecastday.first?.day.mintemp_f {

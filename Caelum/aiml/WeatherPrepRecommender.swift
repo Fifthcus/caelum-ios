@@ -1,5 +1,5 @@
 //
-//  GenerateRecommendation.swift
+//  WeatherPrepRecommender.swift
 //  Caelum
 //
 
@@ -12,12 +12,14 @@ struct Recommendation {
     let text: String
 }
 
-struct GenerateRecommendation: View {
-    @Binding var weatherData: Weather
+/// A SwiftUI view that uses the on-device LLM, to generate and render weather preparation recommendations.
+struct WeatherPrepRecommender: View {
+    var weatherData: Weather
     static let instructions: String = "In two short sentences, suggest how to safely prepare for the weather based on the provided data. Ensure your responses are one sentence after another, no lists, and do not format your response where the second sentence appears on a new line."
     var session = LanguageModelSession(instructions: instructions)
     @State var recommendation: Recommendation.PartiallyGenerated?
     
+    //Recommendation Generator
     func generateRecommendation() async {
         let prompt = "\(weatherData)"
         let responseToStreamToUI = session.streamResponse(to: prompt, generating: Recommendation.self)
@@ -30,6 +32,7 @@ struct GenerateRecommendation: View {
             print(error)
         }
     }
+    
     var body: some View {
         VStack{
             Text(recommendation?.text ?? "Loading...")

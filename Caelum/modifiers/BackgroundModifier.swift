@@ -2,7 +2,6 @@
 //  BackgroundModifier.swift
 //  Caelum
 //
-//
 
 import SwiftUI
 

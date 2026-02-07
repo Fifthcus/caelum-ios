@@ -5,11 +5,11 @@
 
 import SwiftUI
 
+/// When the user submit the locale they wish to determine weather data for, the app navigates to a view which will render the data the app fetched from www.weatherapi.com
 struct ToolbarView: View {
     @State var inputText: String = ""
     @Binding var userInput: String
     @FocusState var isTextFieldFocused: Bool
-    @Binding var weatherData: Weather
     @Binding var path: NavigationPath
     
     func navigateToNewView(){
@@ -53,6 +53,6 @@ struct ToolbarView: View {
             .glassEffect(.clear)
              
         }
-        CurrentLocation(weatherData: $weatherData, userInput: $userInput, path: $path)
+        CurrentLocation(userInput: $userInput, path: $path)
     }
 }

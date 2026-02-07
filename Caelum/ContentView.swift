@@ -6,22 +6,20 @@
 import SwiftUI
 import FoundationModels
 
+/// The senior most view in the entire application.
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
     @State var userInput: String = ""
-    @State var weatherData: Weather = Weather()
     @State private var path = NavigationPath()
-    @State private var onDeviceLLMModel = SystemLanguageModel.default
     var body: some View {
         NavigationStack(path: $path){
-            HomeView(userInput: $userInput, weatherData: $weatherData, path: $path, onDeviceLLMModel: $onDeviceLLMModel)
+            HomeView(userInput: $userInput, path: $path)
                 .navigationDestination(for: String.self) { destination in
-                    WeatherView(userInput: $userInput, weatherData: $weatherData, onDeviceLLMModel: $onDeviceLLMModel)
+                    WeatherView(userInput: $userInput)
                         .navigationBarBackButtonHidden(true)
                         .toolbar{
                             ToolbarItem(placement: .topBarLeading) {
                                 Button {
-                                    weatherData = Weather()
                                     $path.wrappedValue.removeLast()
                                 } label: {
                                     Image(systemName: "chevron.backward")

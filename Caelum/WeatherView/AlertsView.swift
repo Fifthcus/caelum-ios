@@ -5,8 +5,9 @@
 
 import SwiftUI
 
+/// A SwiftUI view which renders alerts. The data is derived from a api fetch request from www.weatherapi.com.
 struct AlertsView: View {
-    @Binding var alerts: Alerts
+    var alerts: Alerts
     var body: some View {
         VStack {
             if let firstAlert = alerts.alert.first {
@@ -16,8 +17,6 @@ struct AlertsView: View {
                 }
                 Text(firstAlert.headline)
                     .foregroundStyle(Color.white)
-            } else {
-                
             }
         }
     }

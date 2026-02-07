@@ -2,7 +2,6 @@
 //  DecodeSecrets.swift
 //  Caelum
 //
-//
 
 import Foundation
 

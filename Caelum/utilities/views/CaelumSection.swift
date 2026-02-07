@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+/// A SwiftUI wrapper view which encapsulates other containerizable content.
 struct CaelumSection<Content: View>: View {
     let icon: String
     let headerText: String

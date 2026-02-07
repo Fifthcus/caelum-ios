@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+///  The header portion of the CaelumSection view. Displaying both an apprioriate icon and header text.
 struct CaelumSectionHeader: View {
     @Binding var icon: String
     @Binding var headerText: String
