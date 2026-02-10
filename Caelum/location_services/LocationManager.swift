@@ -5,10 +5,16 @@
 
 import Combine
 import CoreLocation
+import SwiftUI
+
+struct Coordinates: Equatable {
+    let latitude: Double
+    let longitude: Double
+}
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    @Published var coordinates: CLLocationCoordinate2D? = nil
+    @Published var coordinates: Coordinates?
     
     override init() {
         super.init()
@@ -33,7 +39,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            coordinates = location.coordinate
+            coordinates = Coordinates(
+                latitude: location.coordinate.latitude,
+                longitude: location.coordinate.longitude
+            )
         }
     }
         

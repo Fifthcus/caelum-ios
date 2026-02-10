@@ -10,7 +10,7 @@ import FoundationModels
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
     @State var userInput: String = ""
-    @State private var path = NavigationPath()
+    @State var path = NavigationPath()
     var body: some View {
         NavigationStack(path: $path){
             HomeView(userInput: $userInput, path: $path)

@@ -12,12 +12,10 @@ struct ToolbarView: View {
     @FocusState var isTextFieldFocused: Bool
     @Binding var path: NavigationPath
     
-    func navigateToNewView(){
+    func navigateToNewView(userInput: String, path: NavigationPath){
         isTextFieldFocused = false
-        userInput = inputText
         if !userInput.isEmpty{
-            path.append("weather")
-            inputText = ""
+            self.path.append("weather")
         }
     }
     
@@ -35,7 +33,10 @@ struct ToolbarView: View {
                 .focused($isTextFieldFocused)
                 .foregroundStyle(Color.white)
                 .onSubmit {
-                    navigateToNewView()
+                    isTextFieldFocused = false
+                    userInput = inputText
+                    navigateToNewView(userInput: userInput, path: path)
+                    inputText = ""
                 }
             }
             .foregroundStyle(Color.white)
@@ -44,7 +45,12 @@ struct ToolbarView: View {
             
             //Magnifying Glass
             HStack{
-                Button(action: navigateToNewView){
+                Button(action: {
+                    isTextFieldFocused = false
+                    userInput = inputText
+                    navigateToNewView(userInput: userInput, path: path)
+                    inputText = ""
+                }){
                     Image(systemName: "magnifyingglass")
                 }
             }

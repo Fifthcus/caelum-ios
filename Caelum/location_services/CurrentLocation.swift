@@ -6,11 +6,6 @@
 import SwiftUI
 import CoreLocation
 
-struct Coords: Equatable {
-    var latitude: Double
-    var longitude: Double
-}
-
 struct CurrentLocation: View {
     @StateObject private var manager = LocationManager()
     @Binding var userInput: String
@@ -25,11 +20,11 @@ struct CurrentLocation: View {
             }
             .foregroundStyle(Color.white)
         }
-        .onReceive(manager.$coordinates){ coordinates in
-            guard let coordinates else { return }
-            userInput = "\(coordinates.latitude), \(coordinates.longitude)"
-            path.append("weather")
-            
+        .onChange(of: manager.coordinates){ oldValue, newValue in
+            guard let newValue else { return }
+            self.userInput = "\(newValue.latitude), \(newValue.longitude)"
+            self.path.append("weather")
         }
     }
 }
+
