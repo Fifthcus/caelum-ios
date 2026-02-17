@@ -6,9 +6,9 @@
 	<array>
 		<dict/>
 	</array>
-	<key>NSLocationWhenInUsageDescription</key>
-	<string></string>
-	<key>OPENWEATHER_API_KEY</key>
-	<string>$(OPENWEATHER_API_KEY)</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription or NSCalendarsFullAccessUsageDescription</key>
+	<string>We will use your schedule for the current day, to make recommendations.</string>
+	<key>WEATHERAPI_API_KEY</key>
+	<string>${WEATHERAPI_API_KEY}</string>
 </dict>
 </plist>

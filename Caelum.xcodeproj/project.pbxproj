@@ -278,6 +278,7 @@
 				INFOPLIST_FILE = Caelum/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Caelum;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We will use your schedule for the current day to offer recommendations.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We will use your location to show you weather for your area.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We will use your location to show you weather for your area.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We will use your location to show you weather for your area.";
@@ -316,6 +317,7 @@
 				INFOPLIST_FILE = Caelum/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Caelum;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We will use your schedule for the current day to offer recommendations.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We will use your location to show you weather for your area.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We will use your location to show you weather for your area.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We will use your location to show you weather for your area.";

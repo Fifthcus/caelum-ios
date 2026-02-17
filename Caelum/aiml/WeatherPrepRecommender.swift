@@ -15,13 +15,14 @@ struct Recommendation {
 /// A SwiftUI view that uses the on-device LLM, to generate and render weather preparation recommendations.
 struct WeatherPrepRecommender: View {
     var weatherData: Weather
-    static let instructions: String = "In two short sentences, suggest how to safely prepare for the weather based on the provided data. Ensure your responses are one sentence after another, no lists, and do not format your response where the second sentence appears on a new line."
+    static let instructions: String = "In three short sentences, suggest how to safely prepare for the weather based on the provided weather. Also consider the provided calendar data in your response, to provide more tailored advice. Ensure your responses are relatively brief."
     var session = LanguageModelSession(instructions: instructions)
     @State var recommendation: Recommendation.PartiallyGenerated?
     
     //Recommendation Generator
     func generateRecommendation() async {
-        let prompt = "\(weatherData)"
+        let daysSchedule = await fetchAllEventsForTheDay()
+        let prompt = "\(weatherData), \(daysSchedule)"
         let responseToStreamToUI = session.streamResponse(to: prompt, generating: Recommendation.self)
         
         do {
